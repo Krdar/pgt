@@ -106,6 +106,7 @@ d = [i * 1e-2 for i in list(range(90, 111, 1))]
 
 eta = []
 ucf = []
+al=[]
 for i in d:
     ucf_1 = M.pi * i * n / (2000 * H_0) ** 0.5
     ucf.append(ucf_1)
