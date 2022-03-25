@@ -143,7 +143,7 @@ plt.ylabel("ηo.л")
 plt.grid()
 
 st.pyplot(ucf_eta)
-w=[i for i in list(range(110, 91, 1))]
+w=[i for i in list(range(90, 111, 1))]
 import pandas as pd
 itog = pd.DataFrame ({
                       'ηо.л':eta_,
