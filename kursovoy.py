@@ -11,7 +11,7 @@ st.write('Расчет регулирующей ступени паровой т
 st.subheader('Крыницкая Д. ФПэ-01-19')
 
 
-def iso_bar(wsp_point, min_s=-0.1, max_s=0.11, step_s=0.011, color = 'r'):
+def iso_bar(wsp_point, min_s=-0.1, max_s=0.11, step_s=0.011, color = 'с'):
     if not isinstance(wsp_point,list):
         iso_bar_0_s = np.arange(wsp_point.s+min_s,wsp_point.s+max_s,step_s).tolist()
         iso_bar_0_h = [WSP(P = wsp_point.P, s = i).h for i in iso_bar_0_s]
@@ -23,13 +23,19 @@ def iso_bar(wsp_point, min_s=-0.1, max_s=0.11, step_s=0.011, color = 'r'):
 
 st.write(" ")
 st.write("**Исходные данные:** ")
-
+st.write(" ")
+st.write(" Средний диаметр регулирующей ступени: ")
 d = st.number_input('d, м', value = 1.1)
-p_0 = st.number_input('P0, МПа', value = 13.1)
-T_0 = st.number_input('T0, K', value = 821.15)
+st.write("Давление пара перед ступенью:")
+p_0 = st.number_input('P0, МПа', value = 13.5)
+st.write("Температура пара перед ступенью:")
+T_0 = st.number_input('T0, K', value = 825.15)
+st.write("Частота вращения ротора турбины:")
 n = st.number_input('n, Гц', value = 50)
-G_0 = st.number_input('G_0, кг/с', value = 176.3289)
-H_0 = st.number_input('H_0, кДж/кг', value = 110)
+st.write("Расход пара через ступень:")
+G_0 = st.number_input('G_0, кг/с', value = 177.413)
+st.write("Располагаемый теплоперепад:")
+H_0 = st.number_input('H_0, кДж/кг', value = 90)
 rho = st.number_input('rho', value = 0.05)
 l_1 = st.number_input('l_1, м', value = 0.015 )
 alpha_1 = st.number_input('alpha_1, град', value = 12)
