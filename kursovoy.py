@@ -102,7 +102,7 @@ def callculate_optimum(d, p_0, T_0, n, G_0, H_0, rho, l_1, alpha_1, b_1, Delta, 
     return etta_ol2, alpha_2
 
 st.write(" ")
-d = [i * 1e-2 for i in list(range(90, 111, 5))]
+d = [i * 1e-2 for i in list(range(90, 111, 1))]
 
 eta = []
 ucf = []
