@@ -123,6 +123,15 @@ plt.grid()
 
 st.pyplot(ucf_eta)
 
+import pandas as pd
+itog = pd.DataFrame ({
+                      'ηо.л':eta,
+                      '(u/сф)':ucf,
+                      'α2':alpha,
+                       'H_0, кДж/кг': H_0,
+                     })
+itog
+
 st.write(" ")
 d = 1.1
 u = M.pi*d*n
