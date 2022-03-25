@@ -110,8 +110,12 @@ for i in d:
     ucf_1 = M.pi * i * n / (2000 * H_0) ** 0.5
     ucf.append(ucf_1)
     eta_ol, alpha = callculate_optimum(i, p_0, T_0, n, G_0, H_0, rho, l_1, alpha_1, b_1, Delta, b_2, kappa_vs)
-    print(i, eta_ol, alpha, ucf_1)
     eta.append(eta_ol)
+    al.append(alpha)
+    
+eta_=np.around(eta, decimals=3)
+ucf_=np.around(ucf, decimals=3)
+al_=np.around(al, decimals=2)
 
 ucf_eta = plt.figure()
 
@@ -125,10 +129,10 @@ st.pyplot(ucf_eta)
 
 import pandas as pd
 itog = pd.DataFrame ({
-                      'ηо.л':eta,
-                      '(u/сф)':ucf,
-                      'α2':alpha,
-                       'H_0, кДж/кг': i,
+                      'ηо.л':eta_,
+                      '(u/сф)':ucf_,
+                      'α2':al_,
+                       'H_0, кДж/кг': d,
                      })
 itog
 
