@@ -62,7 +62,7 @@ d = 1.1
 b_2 = 0.03
 
 l_1 = 0.015
-alpha_1e = 14
+alpha_1 = 14
 Delta = 0.003 
 kappa_vs=0
 
