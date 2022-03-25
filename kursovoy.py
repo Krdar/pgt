@@ -128,7 +128,7 @@ itog = pd.DataFrame ({
                       'ηо.л':eta,
                       '(u/сф)':ucf,
                       'α2':alpha,
-                       'H_0, кДж/кг': H_0,
+                       'H_0, кДж/кг': i,
                      })
 itog
 
