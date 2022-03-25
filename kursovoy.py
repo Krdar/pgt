@@ -6,9 +6,9 @@ import numpy as np
 import streamlit as st
 import pandas as pd
 
-st.title('Курсовая работа ')
-st.write('_Расчет регулирующей ступени_')
-st.subheader('Конюхова П.O. ФПэ-01-19 Вариант 6')
+st.title('Курсовая работа часть 2')
+st.write('Расчет регулирующей ступени паровой турбины Т-180/215-12,8-2 ЛМЗ')
+st.subheader('Крыницкая Д. ФПэ-01-19')
 
 
 def iso_bar(wsp_point, min_s=-0.1, max_s=0.11, step_s=0.011, color = 'r'):
