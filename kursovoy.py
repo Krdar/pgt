@@ -50,6 +50,22 @@ b_2 = st.number_input('b_2, м', value = 0.03 )
 st.write("Коэффициент использования выходной скорости: ")
 kappa_vs = st.number_input('kappa_vs', value = 0)
 
+st.write("p_0 = 13.5e6")
+T_0 = 552 + 273.15
+G_0 = 177.413
+H0= 90
+c0 = 0
+ρ=0.05
+n = 50 
+b_1 = 0.06
+d = 1.1
+b_2 = 0.03
+delta = 0.003
+l_1 = 0.015
+alpha_1e = 14
+Delta = 0.003 #перекрыша
+kappa_vs=0
+
 st.write(" ")
 st.write("**Решение:** ")
 
