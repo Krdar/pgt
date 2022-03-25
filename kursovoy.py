@@ -143,15 +143,7 @@ plt.ylabel("ηo.л")
 plt.grid()
 
 st.pyplot(ucf_eta)
-w=[i for i in list(range(90, 111, 1))]
-import pandas as pd
-itog = pd.DataFrame ({
-                      'ηо.л':eta_,
-                      '(u/сф)':ucf_,
-                      'α2':al_,
-                       'H_0, кДж/кг': w,
-                     })
-itog
+
 
 st.write(" ")
 d = 1.1
