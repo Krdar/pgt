@@ -154,7 +154,7 @@ hs = plt.figure()
 def plot_hs_nozzle_t(x_lim, y_lim):
     plt.plot([point_0.s, point_1t.s],[point_0.h, point_1t.h],'ro-')
     iso_bar(point_0,-0.02,0.02,0.001,'c')
-    iso_bar(point_1t,-0.02,0.02,0.001,'y')
+    iso_bar(point_1t,-0.02,0.02,0.001,'m')
     plt.xlim(x_lim)
     plt.ylim(y_lim)
 
