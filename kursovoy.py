@@ -53,7 +53,7 @@ st.write("kappa_vs=0")
 p_0 = 13.5
 T_0 = 552 + 273.15
 G_0 = 177.413
-H_0= 110
+H_0= 90
 c0 = 0
 rho=0.05
 n = 50 
@@ -143,7 +143,7 @@ plt.ylabel("ηo.л")
 plt.grid()
 
 st.pyplot(ucf_eta)
-w=[i for i in list(range(90, 111, 1))]
+w=[i for i in list(range(110, 91, 1))]
 import pandas as pd
 itog = pd.DataFrame ({
                       'ηо.л':eta_,
