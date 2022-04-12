@@ -6,7 +6,7 @@ import numpy as np
 import streamlit as st
 import pandas as pd
 
-st.title('Курсовая работа часть 2')
+st.title('Курсовая работа часть')
 st.write('Расчет регулирующей ступени паровой турбины Т-180/215-12,8-2 ЛМЗ')
 st.subheader('Крыницкая Д. ФПэ-01-19')
 
