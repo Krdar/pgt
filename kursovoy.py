@@ -147,12 +147,15 @@ if page == "Задание 1":
     G_00=np.around(G_0_, decimals=3)
     G_k00=np.around(G_k_, decimals=3)
 
+    
+    Kpd=plt.figure()
     plt.plot(Tpv, kpd_ir_,'ro')
     plt.plot(Tpv, kpd_ir_)
     plt.title('График зависимости КПД ПТУ от температуры питательной воды')
     plt.xlabel('tпв',color='gray')
     plt.ylabel('КПД',color='gray')
-    plt.show()
+    plt.grid()
+    st.pyplot(Kpd)
 
 
     import pandas as pd
