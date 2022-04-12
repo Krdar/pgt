@@ -318,10 +318,13 @@ if page == "Задание 1":
       plt.text(x+0.03, y-60, '$h_' + ind + ' = %.2f $'%y)
 
 
+    HS=plt.figure()
     plt.title("h - s диаграмма")
     plt.xlabel("Значение энтропии s, кДж/(кг*С)", color='gray')
     plt.ylabel("Значение энтальпии h, кДж/кг",color='gray')
     plt.grid(True)
+    plt.grid()
+    st.pyplot(HS)
 
     print('Максимальный КПД:', kpd_ir_)
 
