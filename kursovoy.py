@@ -297,6 +297,7 @@ if page == "Задание 1":
     s_pp_d = [point_pp_d.s-0.05,point_pp_d.s,point_pp_d.s+0.05]
     h_pp_d = h_pp
 
+    HS=plt.figure()
     plt.plot([point_0.s,point_0.s,point_0_.s,point_1.s],[point_1t.h,point_0.h,point_0.h,point_1.h],'y')
     plt.plot([point_pp.s,point_pp.s,point_pp_d.s,point_k.s],[point_kt.h,point_pp.h,point_pp.h,point_k.h],'y')
     plt.plot(s_0,h_0)
@@ -318,7 +319,7 @@ if page == "Задание 1":
       plt.text(x+0.03, y-60, '$h_' + ind + ' = %.2f $'%y)
 
 
-    HS=plt.figure()
+  
     plt.title("h - s диаграмма")
     plt.xlabel("Значение энтропии s, кДж/(кг*С)", color='gray')
     plt.ylabel("Значение энтальпии h, кДж/кг",color='gray')
