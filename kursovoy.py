@@ -981,7 +981,7 @@ if page == "Задание 3":
         ax = fig.gca()
         ax.set_xticks(np.arange(1, 30, 1))
         plt.grid(True)
-        plt.plot(z, di_, '-ob')
+        plt.plot(z, di_, '-ob', c='m')
         plt.title('Рисунок 1. Распределение средних диаметров по проточной части')
         st.pyplot(fig)
 
