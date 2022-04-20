@@ -821,217 +821,217 @@ if page == "Задание 2":
 
     if page == "Задание 3":
         st.write('_Расчет количества нерегулируемых ступеней ЦВД и их теплоперепадов_')
-    st.write(" ")
-    st.write("**Исходные данные:** ")
+        st.write(" ")
+        st.write("**Исходные данные:** ")
 
 
-    drs = st.number_input('drs, м', value=0.9, max_value=1.1)
-    st.caption('p0 = 12.445 МПа')
-    st.caption('h0 = 3465.095 кДж/кг')
-    st.caption('G0 = 176.3289 кг/с')
-    st.caption('pz = 2.739 МПа')
-    st.caption('etaoi = 0.748')
-    st.caption('Количество ступеней ЦВД = 7')
+        drs = st.number_input('drs, м', value=0.9, max_value=1.1)
+        st.caption('p0 = 12.445 МПа')
+        st.caption('h0 = 3465.095 кДж/кг')
+        st.caption('G0 = 176.3289 кг/с')
+        st.caption('pz = 2.739 МПа')
+        st.caption('etaoi = 0.748')
+        st.caption('Количество ступеней ЦВД = 7')
     
    
-    P0 = 12.445
-    h0 = 3465.095
-    G0 = 176.3289
-    etaoi = 0.748
-    Pz = 2.739
-    Z = 7
-    deltaD = 0.26 #m
-    n = 50 # Гц
-    rho_s = 0.05
-    alfa = 15 # град
-    fi = 0.96
-    mu1 = 0.97
-    delta = 0.003
-    tetta = 20
+        P0 = 12.445
+        h0 = 3465.095
+        G0 = 176.3289
+        etaoi = 0.748
+        Pz = 2.739
+        Z = 7
+        deltaD = 0.26 #m
+        n = 50 # Гц
+        rho_s = 0.05
+        alfa = 15 # град
+        fi = 0.96
+        mu1 = 0.97
+        delta = 0.003
+        tetta = 20
 
 
-    D1 = drs - deltaD
-    sat_steam = IAPWS97(P=P0, h=h0)
-    s_0 = sat_steam.s
-    t_0 = sat_steam.T
+        D1 = drs - deltaD
+        sat_steam = IAPWS97(P=P0, h=h0)
+        s_0 = sat_steam.s
+        t_0 = sat_steam.T
 
-    error = 2
-    i = 1
-    while error > 0.5:
-        rho = rho_s + 1.8 / (tetta + 1.8)
-        X = (fi * M.cos(M.radians(alfa))) / (2 * M.sqrt(1 - rho))
-        H01 = 12.3 * (D1 / X) ** 2 * (n / 50) ** 2
-        h2t = h0 - H01
-        steam2t = IAPWS97(h=h2t, s=s_0)
-        v2t = steam2t.v
-        l11 = G0 * v2t * X / (M.pi ** 2 * D1 ** 2 * n * M.sqrt(1 - rho) * M.sin(M.radians(alfa)) * mu1)
-        tetta_old = tetta
-        tetta = D1 / l11
-        #print(i, tetta_old, tetta)
-        error = abs(tetta - tetta_old) / tetta_old * 100
-        #print(error)
-        i += 1
+        error = 2
+        i = 1
+        while error > 0.5:
+            rho = rho_s + 1.8 / (tetta + 1.8)
+            X = (fi * M.cos(M.radians(alfa))) / (2 * M.sqrt(1 - rho))
+            H01 = 12.3 * (D1 / X) ** 2 * (n / 50) ** 2
+            h2t = h0 - H01
+            steam2t = IAPWS97(h=h2t, s=s_0)
+            v2t = steam2t.v
+            l11 = G0 * v2t * X / (M.pi ** 2 * D1 ** 2 * n * M.sqrt(1 - rho) * M.sin(M.radians(alfa)) * mu1)
+            tetta_old = tetta
+            tetta = D1 / l11
+            #print(i, tetta_old, tetta)
+            error = abs(tetta - tetta_old) / tetta_old * 100
+            #print(error)
+            i += 1
 
-    l21 = l11 + delta
-    d_s = D1 - l21
-    steam_tz = IAPWS97(P=Pz, s=s_0)
-    h_zt = steam_tz.h
-    H0 = h0 - h_zt
-    Hi = H0 * etaoi
-    h_z = h0 - Hi
-    steam_z = IAPWS97(P=Pz, h=h_z)
-    v_2z = steam_z.v
-    x = Symbol('x')
-    с = solve(x ** 2 + x * d_s - (l21 * (d_s + l21) * v_2z / v2t))
-    for j in с:
-        if j > 0:
-            l2z = j
-    d2z = d_s + l2z
-    tetta1 = (l21 + d_s) / l21
-    tettaz = (l2z + d_s) / l2z
-    rho1 = rho_s + 1.8 / (1.8 + tetta1)
-    rhoz = rho_s + 1.8 / (1.8 + tettaz)
-    X1 = (fi * cos(M.radians(alfa))) / (2 * sqrt(1 - rho1))
-    Xz = (fi * cos(M.radians(alfa))) / (2 * sqrt(1 - rhoz))
+        l21 = l11 + delta
+        d_s = D1 - l21
+        steam_tz = IAPWS97(P=Pz, s=s_0)
+        h_zt = steam_tz.h
+        H0 = h0 - h_zt
+        Hi = H0 * etaoi
+        h_z = h0 - Hi
+        steam_z = IAPWS97(P=Pz, h=h_z)
+        v_2z = steam_z.v
+        x = Symbol('x')
+        с = solve(x ** 2 + x * d_s - (l21 * (d_s + l21) * v_2z / v2t))
+        for j in с:
+            if j > 0:
+                l2z = j
+        d2z = d_s + l2z
+        tetta1 = (l21 + d_s) / l21
+        tettaz = (l2z + d_s) / l2z
+        rho1 = rho_s + 1.8 / (1.8 + tetta1)
+        rhoz = rho_s + 1.8 / (1.8 + tettaz)
+        X1 = (fi * cos(M.radians(alfa))) / (2 * sqrt(1 - rho1))
+        Xz = (fi * cos(M.radians(alfa))) / (2 * sqrt(1 - rhoz))
 
-    DeltaZ = 1
-    ite = 0
-    
-    while DeltaZ > 0:
-        matr = []
-        Num = 0
-        SumH = 0
-        for _ in range(int(Z)):
-            li = (l21 - l2z) / (1 - Z) * Num + l21
-            di = (D1 - d2z) / (1 - Z) * Num + D1
-            tetta_i = di / li
-            rho_i = rho_s + 1.8 / (1.8 + tetta_i)
-            X_i = (fi * M.cos(M.radians(alfa))) / (2 * M.sqrt(1 - rho_i))
-            if Num < 1:
-                H_i = 12.3 * (di / X_i) ** 2 * (n / 50) ** 2
-            else:
-                H_i = 12.3 * (di / X_i) ** 2 * (n / 50) ** 2 * 0.95
-            Num = Num + 1
-            H_d = 0
-            SumH = SumH + H_i
-            matr.append([Num, round(di, 3), round(li, 3), round(tetta_i, 2), round(rho_i, 3), round(X_i, 3), round(H_i, 2),round(H_d, 2)])
-        H_m = SumH / Z
-        q_t = 4.8 * 10 ** (-4) * (1 - etaoi) * H0 * (Z - 1) / Z
-        Z_new = round(H0 * (1 + q_t) / H_m)
-        DeltaZ = abs(Z - Z_new)
-        #print(ite, Z)
-        Z = Z_new
-        ite += 1
-    DeltaH = (H0 * (1 + q_t) - SumH) / Z
-    a = 0
-    for elem in matr:
-        matr[a][7] = round(elem[6]+DeltaH,2)
-        a += 1
+        DeltaZ = 1
+        ite = 0
+
+        while DeltaZ > 0:
+            matr = []
+            Num = 0
+            SumH = 0
+            for _ in range(int(Z)):
+                li = (l21 - l2z) / (1 - Z) * Num + l21
+                di = (D1 - d2z) / (1 - Z) * Num + D1
+                tetta_i = di / li
+                rho_i = rho_s + 1.8 / (1.8 + tetta_i)
+                X_i = (fi * M.cos(M.radians(alfa))) / (2 * M.sqrt(1 - rho_i))
+                if Num < 1:
+                    H_i = 12.3 * (di / X_i) ** 2 * (n / 50) ** 2
+                else:
+                    H_i = 12.3 * (di / X_i) ** 2 * (n / 50) ** 2 * 0.95
+                Num = Num + 1
+                H_d = 0
+                SumH = SumH + H_i
+                matr.append([Num, round(di, 3), round(li, 3), round(tetta_i, 2), round(rho_i, 3), round(X_i, 3), round(H_i, 2),round(H_d, 2)])
+            H_m = SumH / Z
+            q_t = 4.8 * 10 ** (-4) * (1 - etaoi) * H0 * (Z - 1) / Z
+            Z_new = round(H0 * (1 + q_t) / H_m)
+            DeltaZ = abs(Z - Z_new)
+            #print(ite, Z)
+            Z = Z_new
+            ite += 1
+        DeltaH = (H0 * (1 + q_t) - SumH) / Z
+        a = 0
+        for elem in matr:
+            matr[a][7] = round(elem[6]+DeltaH,2)
+            a += 1
 
 
-    N_=[]
-    di_=[]
-    li_=[]
-    tettai_=[]
-    rhoi_=[]
-    Xi_=[]
-    Hi_=[]
-    Hdi_=[]
-    a = 0
-    for elem in matr:
-        N_.append(matr[a][0])
-        di_.append(matr[a][1])
-        li_.append(matr[a][2])
-        tettai_.append(matr[a][3])
-        rhoi_.append(matr[a][4])
-        Xi_.append(matr[a][5])
-        Hi_.append(matr[a][6])
-        Hdi_.append(matr[a][7])
-        a += 1
+        N_=[]
+        di_=[]
+        li_=[]
+        tettai_=[]
+        rhoi_=[]
+        Xi_=[]
+        Hi_=[]
+        Hdi_=[]
+        a = 0
+        for elem in matr:
+            N_.append(matr[a][0])
+            di_.append(matr[a][1])
+            li_.append(matr[a][2])
+            tettai_.append(matr[a][3])
+            rhoi_.append(matr[a][4])
+            Xi_.append(matr[a][5])
+            Hi_.append(matr[a][6])
+            Hdi_.append(matr[a][7])
+            a += 1
 
-    di_ = [float(x) for x in di_]
-    li_ = [float(x) for x in li_]
-    tettai_ = [float(x) for x in tettai_]
-    rhoi_ = [float(x) for x in rhoi_]
-    Xi_ = [float(x) for x in Xi_]
-    Hi_ = [float(x) for x in Hi_]
-    Hdi_ = [float(x) for x in Hdi_]
+        di_ = [float(x) for x in di_]
+        li_ = [float(x) for x in li_]
+        tettai_ = [float(x) for x in tettai_]
+        rhoi_ = [float(x) for x in rhoi_]
+        Xi_ = [float(x) for x in Xi_]
+        Hi_ = [float(x) for x in Hi_]
+        Hdi_ = [float(x) for x in Hdi_]
 
-    table=pd.DataFrame( {"№ ступени": (N_),
-                            "d_i, м": (di_),
-                            "l_i, м": (li_),
-                            "theta_i": (tettai_),
-                            "rho_i": (rhoi_),
-                            "X_i": (Xi_),
-                            "H_i, кДж/кг": (Hi_),
-                            "H_di, кДж/кг": (Hdi_)
-                            }
-                         )
-    st.dataframe(table)
+        table=pd.DataFrame( {"№ ступени": (N_),
+                                "d_i, м": (di_),
+                                "l_i, м": (li_),
+                                "theta_i": (tettai_),
+                                "rho_i": (rhoi_),
+                                "X_i": (Xi_),
+                                "H_i, кДж/кг": (Hi_),
+                                "H_di, кДж/кг": (Hdi_)
+                                }
+                             )
+        st.dataframe(table)
 
-    z =[]
-    for a in range(1, Z+1):
-        z.append(a)
+        z =[]
+        for a in range(1, Z+1):
+            z.append(a)
 
-    st.write("#")
-    fig = plt.figure(figsize=(10, 5))
-    ax = fig.gca()
-    ax.set_xticks(np.arange(1, 30, 1))
-    plt.grid(True)
-    plt.plot(z, di_, '-ob')
-    plt.title('Рисунок 1. Распределение средних диаметров по проточной части')
-    st.pyplot(fig)
+        st.write("#")
+        fig = plt.figure(figsize=(10, 5))
+        ax = fig.gca()
+        ax.set_xticks(np.arange(1, 30, 1))
+        plt.grid(True)
+        plt.plot(z, di_, '-ob')
+        plt.title('Рисунок 1. Распределение средних диаметров по проточной части')
+        st.pyplot(fig)
 
-    st.write("#")
-    fig = plt.figure(figsize=(10, 5))
-    ax = fig.gca()
-    ax.set_xticks(np.arange(1, 30, 1))
-    plt.grid(True)
-    plt.plot(z, li_, '-ob')
-    plt.title('Рисунок 2. Распределение высот лопаток по проточной части')
-    st.pyplot(fig)
+        st.write("#")
+        fig = plt.figure(figsize=(10, 5))
+        ax = fig.gca()
+        ax.set_xticks(np.arange(1, 30, 1))
+        plt.grid(True)
+        plt.plot(z, li_, '-ob')
+        plt.title('Рисунок 2. Распределение высот лопаток по проточной части')
+        st.pyplot(fig)
 
-    st.write("#")
-    fig = plt.figure(figsize=(10, 5))
-    ax = fig.gca()
-    ax.set_xticks(np.arange(1, 30, 1))
-    plt.grid(True)
-    plt.plot(z, tettai_, '-ob')
-    plt.title('Рисунок 3. Распределение обратной веерности по проточной части')
-    st.pyplot(fig)
+        st.write("#")
+        fig = plt.figure(figsize=(10, 5))
+        ax = fig.gca()
+        ax.set_xticks(np.arange(1, 30, 1))
+        plt.grid(True)
+        plt.plot(z, tettai_, '-ob')
+        plt.title('Рисунок 3. Распределение обратной веерности по проточной части')
+        st.pyplot(fig)
 
-    st.write("#")
-    fig = plt.figure(figsize=(10, 5))
-    ax = fig.gca()
-    ax.set_xticks(np.arange(1, 30, 1))
-    plt.grid(True)
-    plt.plot(z, rhoi_, '-ob')
-    plt.title('Рисунок 4. Распределение степени реактивности по проточной части')
-    st.pyplot(fig)
+        st.write("#")
+        fig = plt.figure(figsize=(10, 5))
+        ax = fig.gca()
+        ax.set_xticks(np.arange(1, 30, 1))
+        plt.grid(True)
+        plt.plot(z, rhoi_, '-ob')
+        plt.title('Рисунок 4. Распределение степени реактивности по проточной части')
+        st.pyplot(fig)
 
-    st.write("#")
-    fig = plt.figure(figsize=(10, 5))
-    ax = fig.gca()
-    ax.set_xticks(np.arange(1, 30, 1))
-    plt.grid(True)
-    plt.plot(z, Xi_, '-ob')
-    plt.title('Рисунок 5. Распределение U/Cф по проточной части')
-    st.pyplot(fig)
+        st.write("#")
+        fig = plt.figure(figsize=(10, 5))
+        ax = fig.gca()
+        ax.set_xticks(np.arange(1, 30, 1))
+        plt.grid(True)
+        plt.plot(z, Xi_, '-ob')
+        plt.title('Рисунок 5. Распределение U/Cф по проточной части')
+        st.pyplot(fig)
 
-    st.write("#")
-    fig = plt.figure(figsize=(10, 5))
-    ax = fig.gca()
-    ax.set_xticks(np.arange(1, 30, 1))
-    plt.grid(True)
-    plt.plot(z, Hi_, '-ob')
-    plt.title('Рисунок 6. Распределение теплоперепадов по проточной части')
-    st.pyplot(fig)
+        st.write("#")
+        fig = plt.figure(figsize=(10, 5))
+        ax = fig.gca()
+        ax.set_xticks(np.arange(1, 30, 1))
+        plt.grid(True)
+        plt.plot(z, Hi_, '-ob')
+        plt.title('Рисунок 6. Распределение теплоперепадов по проточной части')
+        st.pyplot(fig)
 
-    st.write("#")
-    fig = plt.figure(figsize=(10, 5))
-    ax = fig.gca()
-    ax.set_xticks(np.arange(1, 30, 1))
-    plt.grid(True)
-    plt.plot(z, Hdi_, '-ob')
-    plt.title('Рисунок 7. Распределение теплоперепадов с учетом невязки по проточной части')
-    st.pyplot(fig)
+        st.write("#")
+        fig = plt.figure(figsize=(10, 5))
+        ax = fig.gca()
+        ax.set_xticks(np.arange(1, 30, 1))
+        plt.grid(True)
+        plt.plot(z, Hdi_, '-ob')
+        plt.title('Рисунок 7. Распределение теплоперепадов с учетом невязки по проточной части')
+        st.pyplot(fig)
