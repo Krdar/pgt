@@ -827,7 +827,7 @@ if page == "Задание 3":
         st.write("**Исходные данные:** ")
 
 
-        drs = st.number_input('drs, м', value=0.9, max_value=1.1)
+        st.caption('drs = 1.1 м')
         st.caption('p0 = 12.445 МПа')
         st.caption('h0 = 3465.095 кДж/кг')
         st.caption('G0 = 176.3289 кг/с')
@@ -836,6 +836,7 @@ if page == "Задание 3":
         st.caption('Количество ступеней ЦВД = 7')
     
    
+        drs = 1.1
         P0 = 12.445
         h0 = 3465.095
         G0 = 176.3289
