@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import streamlit as st
 import pandas as pd
+from sympy import *
+from IPython.display import HTML, display
 
 st.title('Курсовая работа')
 st.write('Расчет регулирующей ступени паровой турбины Т-180/215-12,8-2 ЛМЗ')
