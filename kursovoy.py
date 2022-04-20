@@ -991,7 +991,8 @@ if page == "Задание 3":
         ax = fig.gca()
         ax.set_xticks(np.arange(1, 30, 1))
         plt.grid(True)
-        plt.plot(z, li_, '-ob')
+        plt.plot(z, li_, c='b')
+        plt.plot(z, li_, 'ro', c='r')
         plt.title('Рисунок 2. Распределение высот лопаток по проточной части')
         st.pyplot(fig)
 
@@ -1000,7 +1001,8 @@ if page == "Задание 3":
         ax = fig.gca()
         ax.set_xticks(np.arange(1, 30, 1))
         plt.grid(True)
-        plt.plot(z, tettai_, '-ob')
+        plt.plot(z, tettai_, c='b')
+        plt.plot(z, tettai_, 'ro', c='r')
         plt.title('Рисунок 3. Распределение обратной веерности по проточной части')
         st.pyplot(fig)
 
@@ -1009,7 +1011,8 @@ if page == "Задание 3":
         ax = fig.gca()
         ax.set_xticks(np.arange(1, 30, 1))
         plt.grid(True)
-        plt.plot(z, rhoi_, '-ob')
+        plt.plot(z, rhoi_, c='b')
+        plt.plot(z, rhoi_,'ro', c='r')
         plt.title('Рисунок 4. Распределение степени реактивности по проточной части')
         st.pyplot(fig)
 
@@ -1018,7 +1021,8 @@ if page == "Задание 3":
         ax = fig.gca()
         ax.set_xticks(np.arange(1, 30, 1))
         plt.grid(True)
-        plt.plot(z, Xi_, '-ob')
+        plt.plot(z, Xi_, c='b')
+        plt.plot(z, Xi_, 'ro', c='r')
         plt.title('Рисунок 5. Распределение U/Cф по проточной части')
         st.pyplot(fig)
 
@@ -1027,7 +1031,8 @@ if page == "Задание 3":
         ax = fig.gca()
         ax.set_xticks(np.arange(1, 30, 1))
         plt.grid(True)
-        plt.plot(z, Hi_, '-ob')
+        plt.plot(z, Hi_, c='b')
+        plt.plot(z, Hi_, 'ro', c='r')
         plt.title('Рисунок 6. Распределение теплоперепадов по проточной части')
         st.pyplot(fig)
 
@@ -1036,6 +1041,7 @@ if page == "Задание 3":
         ax = fig.gca()
         ax.set_xticks(np.arange(1, 30, 1))
         plt.grid(True)
-        plt.plot(z, Hdi_, '-ob')
+        plt.plot(z, Hdi_, c='b')
+        plt.plot(z, Hdi_, 'ro', c='r')
         plt.title('Рисунок 7. Распределение теплоперепадов с учетом невязки по проточной части')
         st.pyplot(fig)
