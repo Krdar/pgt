@@ -1046,4 +1046,7 @@ if page == "Задание 3":
         plt.title('Рисунок 7. Распределение теплоперепадов с учетом невязки по проточной части')
         st.pyplot(fig)
 if page == "Чертеж и модель":
-        привет 
+        from PIL import Image
+        image = Image.open('photo1.png')
+
+        st.image(image, caption='3-D модель')
