@@ -1050,5 +1050,4 @@ if page == "Чертеж и модель":
         image1 = Image.open('photo2.png')
         st.image(image1, caption='Чертеж')
         image2 = Image.open('photo1.png')
-        image3 = Image.open('photo3.png')
-        st.image(image3, caption='3-D модель')
+        st.image(image2, caption='3-D модель')
