@@ -1047,6 +1047,7 @@ if page == "Задание 3":
         st.pyplot(fig)
 if page == "Чертеж и модель":
         from PIL import Image
+         image = Image.open('photo2.png')
+        st.image(image, caption='Чертеж')
         image = Image.open('photo1.png')
-
         st.image(image, caption='3-D модель')
